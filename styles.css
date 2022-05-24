@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Lato:ital,wght@0,300;0,700;1,400;1,700&display=swap');
+
+.sideImage {
+    background-color: beige;
+}
+
+h1 {
+    font-family: 'Fjalla One', sans-serif;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 70%;
+}
+
+h2, p {
+    font-family: 'Lato', sans-serif;    
+    text-align: center;
+}
+
+#PlaylistSelection, #FinalPlaylist {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flexbox;
+    flex-direction: row;
+    background-color: gray;
+    /* border-style: solid;
+    border-color: white;
+    border-width: 2px;  */
+    margin-bottom: .25rem;
+    color: aliceblue;
+    border-radius: .5rem;
+}
+
+.songTable {
+    display: inline;
+    margin-right: .25rem;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+.addButton {
+    display: inline;
+    float: right;
+}
+
+.tableId {
+    font-weight: 700;
+}
+
+.tableName {
+    font-weight: 700;
+    text-align: center;
+}
+
+.tableAutor {
+    font-weight: 400;
+}
+
+.tableGenero{
+    margin-left: 2rem;
+ 
+}
+
+.tableTiempo {
+    float: right;
+}
+
+.tableAplausos {
+    float: right;
+}
+
+#artistTest img {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 500px;
+    min-width: 500px;
+    max-height: 500px;
+    min-width: 500px;
+    border-radius: 1rem;
+}
+
+#inputsForUserSong {
+    margin-right: auto;
+    margin-left: auto;
+    width: 30%;
+    display: flexbox;
+
+}
+
+form {
+    -webkit-appearance: none;
+    text-align: center;
+}
+
+#selectDeGenero {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: large;
+    width: 6rem;
+    height: 3rem;
+    padding: .25rem;
+    border-radius: .5rem;
+    background-color: rgb(67, 147, 197);
+    color: aliceblue;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body id="all">
+    <h1>Create your own playlist & find out your sould artist</h1>
+    
+
+    <!-- INITIAL PLAYLIST -->
+    <p>Current playlist</p>
+    <section id="PlaylistSelection">
+        
+    </section>
+    
+    <!-- USER GENRE SELECTION -->
+    <h2>Select your genre</h2>
+    <section id="inputsForUserSong">
+        <form name="genreForm">
+            <select id="selectDeGenero" name="tema">
+                <option value=""></option>
+                <option value="Rock">Rock</option>
+                <option value="Pop">Pop</option>
+                <option value="KPOP">KPOP</option>
+                <option value="Rap">Rap</option>
+            </select>      
+        </form>
+    </section>
+
+    <!-- FINAL PLAYLIST -->
+    <h2>Your selected songs will be shown here</h2>
+    <section id="FinalPlaylist">
+        
+    </section>
+    
+    <!-- ARTIST TEST -->    
+    <h2>¿Quieres saber que artista de la playlist eres?</h2>
+    <p>Coloca tu mouse sobre la imagen (y no dejes de moverlo) y apartalo cuando te sientas listo para averiguarlo</p>
+
+    <section id="artistTest">
+        <h1 id="eres">Eres: </h1>
+        <p id="responseOnEnter"></p>
+        <img id="imageForTest" src="images/band0.jpg" alt="">
+        <p>Apolla a tu artista presionando ENTER y regalandole aplausos 👏🏼</p>
+    </section>
+
+
+    <script src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+
+</body>
+</html>
