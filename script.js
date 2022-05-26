@@ -1,10 +1,27 @@
-
+// TO SOLVE: Necesitamos que se pueda cargar a alguna clase de local storage o JSON
+// TO SOLVE: Set un timeout que haga que desaparezca algo, creo que pudiera ser en el select del genero, potencialmente añadindo sweet alert ahi tambien.
+// TO SOLVE: Instalar bootstrap to make it presentable
+// TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
 
 
 
 // El concepto es de un board de canciones que las personas podrán apoyar con el presionar de un Enter a partir del resultado del test en la parte inferior. 
 
 localStorage.clear();
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+            title: 'Coderhouse',
+            body: 'Post de prueba',
+            userId: 1,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
 
 
 
@@ -132,6 +149,9 @@ enterValidation.addEventListener("keypress", (event) => {
         let bandNameFilter = bandNames[imgV-1];
         console.log("bandNameFilter is " + bandNameFilter);
 
+
+        // TO SOLVE: Necesitamos que haya una opcion si le dan ENTER pero no hay nada seleccionado
+
         Toastify({ // Uso de librerias (⭐️)
             text: "👏🏼 for " + bandNames[imgV-1],
             gravity: "bottom",
@@ -158,8 +178,6 @@ enterValidation.addEventListener("keypress", (event) => {
           initialPlaylist = document.getElementById("PlaylistSelection");
           stringify = stringsOfArrayOfSongs.join("");
           initialPlaylist.innerHTML = stringify;
-
-
     
 } )
 
