@@ -1,4 +1,5 @@
-// TO SOLVE: Necesitamos que se pueda cargar a alguna clase de local storage o JSON
+async function render() {
+    // TO SOLVE: Necesitamos que se pueda cargar a alguna clase de local storage o JSON
 // TO SOLVE: Set un timeout que haga que desaparezca algo, creo que pudiera ser en el select del genero, potencialmente añadindo sweet alert ahi tambien.
 // TO SOLVE: Instalar bootstrap to make it presentable
 // TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
@@ -8,60 +9,29 @@
 // El concepto es de un board de canciones que las personas podrán apoyar con el presionar de un Enter a partir del resultado del test en la parte inferior. 
 
 localStorage.clear();
-
-fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-            title: 'Coderhouse',
-            body: 'Post de prueba',
-            userId: 1,
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
+const resp = await fetch('https://jackzorola10.github.io/fetch-entregaFinal-javascriptZorola/songs.json')
+const data = await resp.json()
 
 
 
 // Array inicial con las canciones presentadas al usuario. 
-const songs = [
-    {   id:1 , name: "Romantic Movies", autor: "Kay Vs the Moon", genero:"Rock", aplausos: 0   },
-    {   id:2 , name: "En cuatro", autor: "Amigos Invisibles", genero:"Rock", aplausos: 0   },
-    {   id:3 , name: "Toxic", autor: "Britney Spears", genero:"Pop", aplausos: 0      },
-    {   id:4 , name: "The Feels", autor: "TWICE", genero:"KPOP", aplausos: 0      },
-    {   id:5 , name: "Patiently Waiting (ft Eminem)", autor: "50 Cent", genero:"Rap", aplausos: 0  },
-    {   id:6 , name: "Sunny Afternoon", autor: "Drake Bell", genero:"Rock", aplausos: 0     },
-    {   id:7 , name: "Till I Collapse", autor: "Eminem", genero:"Rap", aplausos: 0    },
-    {   id:8 , name: "Bad Habits", autor: "Ed Sheeran", genero:"Pop", aplausos: 0  },
-    {   id:9 , name: "Lie", autor: "BTS", genero:"KPOP", aplausos: 0   },
-    {   id:10 , name: "I Will Survive", autor: "Hermes House Band", genero:"Pop", aplausos: 0   },
-    {   id:11 , name: "Still D.R.E. (ft. Snoop Dog)", autor: "Dr. D.R.E.", genero:"Rap", aplausos: 0  },
-    {   id:12 , name: "Love Again", autor: "Dua Lipa", genero:"Pop", aplausos: 0    },
-    {   id:13 , name: "Come With Me Now", autor: "Kongos", genero:"Rock", aplausos: 0   },
-    {   id:14 , name: "Bellacoso", autor: "Residente", genero:"Rap", aplausos: 0    },
-    {   id:15 , name: "Close Up On Your Lips", autor: "Kay Vs the Moon", genero:"Rock", aplausos: 0    },
-    {   id:16 , name: "Torero", autor: "Chayanne", genero:"Pop", aplausos: 0     },
-    {   id:17 , name: "How u like that", autor: "BLACKPINK", genero:"KPOP", aplausos: 0     },
-    {   id:18 , name: "Energetic", autor: "Wanna One", genero:"KPOP", aplausos: 0    },
-    {   id:19 , name: "Ko Ko Bop", autor: "EXO", genero:"KPOP", aplausos: 0    },
-    {   id:20 , name: "The Bidding", autor: "Tally Hall", genero:"Rock", aplausos: 0   },
-]
 
+songs = [...data]
 
 // Array de nombres de las bandas, este array esta matcheado contra las imagenes que tenemos en la carpeta. Para que le aparezca al usuario el nombre dependiendo de lo que le haya aparecido. 
 
 let bandNames = []
 
-for (let obj of songs) {
+/* for (let obj of songs) {
     bandNames = [...bandNames, obj.autor]   // Spread (⭐️)
-}
+} */
 
 let stringsOfArrayOfSongs = [] // Se llenará de un string hecho para poder depositarse con un innerHTML de manera comoda. 
  
 // Funcion que transforma los arrays de objetos en las tablas para imprimirlas.
-function printTableOfSongs(arrayOfObj) {
+
+const printTableOfSongs = (arrayOfObj) => {
+    console.log(arrayOfObj)
     stringsOfArrayOfSongs.splice(0, stringsOfArrayOfSongs.length);
     for (let i = 0; i < arrayOfObj.length; i++) {
         stringsOfArrayOfSongs.push(
@@ -74,7 +44,8 @@ function printTableOfSongs(arrayOfObj) {
         "</div>"
         );
     }
-}
+    console.log(stringsOfArrayOfSongs.length)
+} 
 
 printTableOfSongs(songs);
 console.log(stringsOfArrayOfSongs);
@@ -84,9 +55,10 @@ console.log(stringsOfArrayOfSongs);
 
 // ########################################################################################################################
 
+
     // Imprimimos la primer tabla que se ve hasta arriba para el usuario.
     let initialPlaylist = document.getElementById("PlaylistSelection");
-    initialPlaylist.innerHTML = stringsOfArrayOfSongs.join("");
+        initialPlaylist.innerHTML = stringsOfArrayOfSongs.join("")
 
 // ########################################################################################################################
 
@@ -182,5 +154,6 @@ enterValidation.addEventListener("keypress", (event) => {
 } )
 
 
+}
 
-
+render();
