@@ -1,8 +1,8 @@
 async function render() {
-    // TO SOLVE: Necesitamos que se pueda cargar a alguna clase de local storage o JSON
-// TO SOLVE: Set un timeout que haga que desaparezca algo, creo que pudiera ser en el select del genero, potencialmente añadindo sweet alert ahi tambien.
+
 // TO SOLVE: Instalar bootstrap to make it presentable
 // TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
+// We still need to create the post from the form
 
 
 
@@ -12,19 +12,19 @@ localStorage.clear();
 const resp = await fetch('https://jackzorola10.github.io/fetch-entregaFinal-javascriptZorola/songs.json')
 const data = await resp.json()
 
-
-
 // Array inicial con las canciones presentadas al usuario. 
 
 songs = [...data]
+console.log(songs)
+
 
 // Array de nombres de las bandas, este array esta matcheado contra las imagenes que tenemos en la carpeta. Para que le aparezca al usuario el nombre dependiendo de lo que le haya aparecido. 
 
 let bandNames = []
 
-/* for (let obj of songs) {
+for (let obj of songs) {
     bandNames = [...bandNames, obj.autor]   // Spread (⭐️)
-} */
+}
 
 let stringsOfArrayOfSongs = [] // Se llenará de un string hecho para poder depositarse con un innerHTML de manera comoda. 
  
