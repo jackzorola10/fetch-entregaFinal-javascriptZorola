@@ -102,45 +102,49 @@ bandImage.onmousemove = () => {
 // En esta sección adquirimos el evento del ENTER y cada que esto ocurra escribimos un array nuevo el cual se imprime en la tabla superior, con la diferencia en que dependiendo del artista que le haya tocado en el array sumaremos "aplausos" a este artista. 
 
 let enterValidation = document.getElementById("all");
-let superFancy
-
 
 enterValidation.addEventListener("keypress", (event) => {
     function confirmationToast() {
-        let bandNameFilter = bandNames[imgV-1];
-        console.log("bandNameFilter is " + bandNameFilter);
+        if (imgV === 0 ) {
+            return
+        } else {
+            let bandNameFilter = bandNames[imgV-1];
+            console.log("bandNameFilter is " + bandNameFilter);
+        
+            Toastify({ // Uso de librerias (⭐️)
+                text: "👏🏼 for " + bandNames[imgV-1],
+                gravity: "bottom",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                  }
+            }).showToast();
+    
+            const newArr = songs.map(obj => {
+                if (obj.autor === bandNameFilter) {
+                    return {
+                      id: obj.id,
+                      name: obj.name,
+                      autor: obj.autor,
+                      genero: obj.genero,
+                      aplausos: parseInt(obj.aplausos++)};
+                  }
+                  return obj;  
+              });
+    
+                    printTableOfSongs(newArr);
+                    initialPlaylist = document.getElementById("PlaylistSelection");
+                    stringify = stringsOfArrayOfSongs.join("");
+                    initialPlaylist.innerHTML = stringify;
+                    console.log("ENTER");
 
-        // TO SOLVE: Necesitamos que haya una opcion si le dan ENTER pero no hay nada seleccionado
+        }
 
-        Toastify({ // Uso de librerias (⭐️)
-            text: "👏🏼 for " + bandNames[imgV-1],
-            gravity: "bottom",
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-              }
-        }).showToast();
-
-        const newArr = songs.map(obj => {
-            if (obj.autor === bandNameFilter) {
-                return {
-                  id: obj.id,
-                  name: obj.name,
-                  autor: obj.autor,
-                  genero: obj.genero,
-                  aplausos: parseInt(obj.aplausos++)};
-              }
-              return obj;  
-          });
-
-                printTableOfSongs(newArr);
-                initialPlaylist = document.getElementById("PlaylistSelection");
-                stringify = stringsOfArrayOfSongs.join("");
-                initialPlaylist.innerHTML = stringify;
-                console.log("ENTER");
     }
     
-                event.key === "Enter" && confirmationToast()
+                event.key === "Enter" && confirmationToast() // Uso de operador logico AND (⭐️)
                 event.preventDefault();
+                
+                event.key !== "Enter" && console.log("Not enter")
 })
 
 // ########################################################################################################################
