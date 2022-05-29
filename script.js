@@ -27,12 +27,12 @@ const printTableOfSongs = (arrayOfObj) => {
     stringsOfArrayOfSongs.splice(0, stringsOfArrayOfSongs.length);
     for (let i = 0; i < arrayOfObj.length; i++) {
         stringsOfArrayOfSongs.push(
-        "<div class='row'>" +
-            "<p class='songTable tableId'>" + arrayOfObj[i].id + ' - </p>' +
-            "<p class='songTable tableName'>" + arrayOfObj[i].name + '</p>' +
-            "<p class='songTable tableAutor'> by " + arrayOfObj[i].autor + '</p>' +
-            "<p class='songTable tableGenero'>" + arrayOfObj[i].genero + '</p>' + 
-            "<p class='songTable tableAplausos'>" + "👏🏼" + arrayOfObj[i].aplausos + '</p>' +
+        "<div class='d-flex flex-row d-inline justify-content-between'>" +
+            "<p class='songTable d-inline'>" + arrayOfObj[i].id + ' - </p>' +
+            "<p class='songTable d-inline'>" + arrayOfObj[i].name + '</p>' +
+            "<p class='songTable d-inline'> by " + arrayOfObj[i].autor + '</p>' +
+            "<p class='songTable d-inline'>" + arrayOfObj[i].genero + '</p>' + 
+            "<p class='songTable d-inline'>" + "👏🏼" + arrayOfObj[i].aplausos + '</p>' +
         "</div>"
         );
     }
@@ -157,3 +157,15 @@ render();
 
 // TO SOLVE: Instalar bootstrap to make it presentable
 // TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
+// Make connection with email post https://www.emailjs.com/
+
+// El proyecto final debe incluir:
+/* 
+        Objetos y Arrays. Métodos de Arrays.
+        Funciones y condicionales.
+        Generación del DOM de forma dinámica. Eventos.
+        Sintaxis avanzada.
+        Al menos una librería de uso relevante para el proyecto.
+        Manejo de promesas con fetch. 
+        Carga de datos desde un JSON local o desde una API externa.
+ */
