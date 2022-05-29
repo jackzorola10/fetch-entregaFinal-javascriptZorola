@@ -1,11 +1,5 @@
 async function render() {
 
-// TO SOLVE: Instalar bootstrap to make it presentable
-// TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
-// We still need to create the post from the form
-
-
-
 // El concepto es de un board de canciones que las personas podrán apoyar con el presionar de un Enter a partir del resultado del test en la parte inferior. 
 
 localStorage.clear();
@@ -15,8 +9,6 @@ const data = await resp.json()
 // Array inicial con las canciones presentadas al usuario. 
 
 songs = [...data]
-console.log(songs)
-
 
 // Array de nombres de las bandas, este array esta matcheado contra las imagenes que tenemos en la carpeta. Para que le aparezca al usuario el nombre dependiendo de lo que le haya aparecido. 
 
@@ -114,13 +106,9 @@ let superFancy
 
 
 enterValidation.addEventListener("keypress", (event) => {
-    event.key === "Enter" &&    // Operador Logico AND (⭐️)
-        event.preventDefault();
-        console.log("ENTER");
-
+    function confirmationToast() {
         let bandNameFilter = bandNames[imgV-1];
         console.log("bandNameFilter is " + bandNameFilter);
-
 
         // TO SOLVE: Necesitamos que haya una opcion si le dan ENTER pero no hay nada seleccionado
 
@@ -133,7 +121,6 @@ enterValidation.addEventListener("keypress", (event) => {
         }).showToast();
 
         const newArr = songs.map(obj => {
-
             if (obj.autor === bandNameFilter) {
                 return {
                   id: obj.id,
@@ -143,17 +130,26 @@ enterValidation.addEventListener("keypress", (event) => {
                   aplausos: parseInt(obj.aplausos++)};
               }
               return obj;  
-
           });
 
-          printTableOfSongs(newArr);
-          initialPlaylist = document.getElementById("PlaylistSelection");
-          stringify = stringsOfArrayOfSongs.join("");
-          initialPlaylist.innerHTML = stringify;
+                printTableOfSongs(newArr);
+                initialPlaylist = document.getElementById("PlaylistSelection");
+                stringify = stringsOfArrayOfSongs.join("");
+                initialPlaylist.innerHTML = stringify;
+                console.log("ENTER");
+    }
     
-} )
+                event.key === "Enter" && confirmationToast()
+                event.preventDefault();
+})
+
+// ########################################################################################################################
 
 
 }
 
 render();
+
+
+// TO SOLVE: Instalar bootstrap to make it presentable
+// TO SOLVE: Make it so the filter is the only thing from which you can select in the section below

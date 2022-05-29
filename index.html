@@ -49,23 +49,22 @@
         <p>Apolla a tu artista presionando ENTER y regalandole aplausos 👏🏼</p>
     </section>
 
-    <form action="">
-        <label for="uSongName">Nombre de la canción:</label><br>
-        <input type="text" id="uSongName" name="uSongName" value="Tu canción"><br>
+    <div class="wrapper">
+            <label for="song-name">Nombre de la canción</label>
+            <input id="song-name" type="text" name="song-name" placeholder="Song Name"/>
+            <label for="song-name">Nombre del autor</label>
+            <input id="author-name" type="text" name="author-name" placeholder="Author Name"/>
+            <label for="song-name">Genero</label>
+            <select id="song-genre" name="song-genre">
+                <option value="" placeholder="Select!"></option>
+                <option value="Rock">Rock</option>
+                <option value="Pop">Pop</option>
+                <option value="KPOP">KPOP</option>
+                <option value="Rap">Rap</option>
+            </select>     
+            <button id="save">Save Data</button>
 
-        <label for="uAuthorName">Autor de la canción:</label><br>
-        <input type="text" id="uAuthorName" name="uAuthorName" value="Autor"><br><br>
-
-        <label for="userGenreSelector">Genero:</label>
-        <select id="userGenreSelector" name="userGenreSelector" form="generoform">
-          <option value="Rock">Rock</option>
-          <option value="Pop">Pop</option>
-          <option value="Rap">Rap</option>
-          <option value="KPOP">KPOP</option>
-        </select><br><br>
-
-        <input type="submit" value="crear">
-      </form> 
+    </div>
       
       
 
