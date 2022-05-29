@@ -27,13 +27,13 @@ const printTableOfSongs = (arrayOfObj) => {
     stringsOfArrayOfSongs.splice(0, stringsOfArrayOfSongs.length);
     for (let i = 0; i < arrayOfObj.length; i++) {
         stringsOfArrayOfSongs.push(
-        "<div class='d-flex flex-row d-inline justify-content-between'>" +
-            "<p class='songTable d-inline'>" + arrayOfObj[i].id + ' - </p>' +
-            "<p class='songTable d-inline'>" + arrayOfObj[i].name + '</p>' +
-            "<p class='songTable d-inline'> by " + arrayOfObj[i].autor + '</p>' +
-            "<p class='songTable d-inline'>" + arrayOfObj[i].genero + '</p>' + 
-            "<p class='songTable d-inline'>" + "👏🏼" + arrayOfObj[i].aplausos + '</p>' +
-        "</div>"
+        "<tr>" +
+            "<th scope='row'>" + arrayOfObj[i].id + '</th>' +
+            "<td>" + arrayOfObj[i].name + '</td>' +
+            "<td>" + arrayOfObj[i].autor + '</td>' +
+            "<td>" + arrayOfObj[i].genero + '</td>' + 
+            "<td>" + "👏🏼" + arrayOfObj[i].aplausos + '</td>' +
+        "</tr>"
         );
     }
     console.log(stringsOfArrayOfSongs.length)
