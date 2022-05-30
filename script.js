@@ -156,8 +156,6 @@ enterValidation.addEventListener("keypress", (event) => {
 
 render();
 
-
-// TO SOLVE: Instalar bootstrap to make it presentable
 // TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
 // Make connection with email post https://www.emailjs.com/
 
