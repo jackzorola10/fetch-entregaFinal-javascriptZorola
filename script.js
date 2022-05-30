@@ -29,9 +29,9 @@ const printTableOfSongs = (arrayOfObj) => {
         stringsOfArrayOfSongs.push(
         "<tr>" +
             "<th scope='row'>" + arrayOfObj[i].id + '</th>' +
-            "<td>" + arrayOfObj[i].name + '</td>' +
+            "<td><strong>" + arrayOfObj[i].name + '</strong></td>' +
             "<td>" + arrayOfObj[i].autor + '</td>' +
-            "<td>" + arrayOfObj[i].genero + '</td>' + 
+            "<td class='text-muted'>" + arrayOfObj[i].genero + '</td>' + 
             "<td>" + "👏🏼" + arrayOfObj[i].aplausos + '</td>' +
         "</tr>"
         );
@@ -58,6 +58,8 @@ console.log(stringsOfArrayOfSongs);
 let songFilter = [];
 const userGenre = document.getElementById("selectDeGenero");
 
+console.log("userGenre is " + userGenre)
+
 userGenre.addEventListener('change', () => {                    // Evento utilizado.
     console.log("Genre obtained = " + event.target.value);
     songFilter = songs.filter(   (el) => el.genero.includes(event.target.value)  ); 
@@ -67,7 +69,7 @@ userGenre.addEventListener('change', () => {                    // Evento utiliz
 
     console.log(stringsOfArrayOfSongs);
     printFilteredPlaylist ();
-})
+}) 
 
 // ########################################################################################################################
 
