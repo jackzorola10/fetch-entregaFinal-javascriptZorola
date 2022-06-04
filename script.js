@@ -76,15 +76,17 @@ userGenre.addEventListener('change', () => {                    // Event Listene
 let bandImage = document.getElementById('imageForTest'); 
 let bandEres = document.getElementById('eres');
 let imgV = parseInt(0); // Dado que nuestras imagenes estan en un orden especifico, todas tienen un nombre similar, variando solo por el numero al final. Ej: "images/band1.jpg" Podemos rotar a traves de ellas, teniendo el largo del array como limite.
+let imageBlock = false;
 
 bandImage.onmousemove = () => {
-    imgV++        // Sugar Syntax (⭐️)
     console.log("mousemove")
-    bandImage.src="images/band" + imgV + ".jpg" // Cambia el nombre del archivo para que así se altere el source de la imagen, cambiandola.
-    bandEres.innerText = "Eres: " + bandNames[imgV-1]; // Se le informa al usuario que artista es. 
-    localStorage.setItem('mainBandName', bandNames[imgV-1]); // Se carga el ultimo resultado al local storage // Local Storage (⭐️)
-    imgV > bandNames.length-1 ? imgV = 0 : imgV // Una ves que las imagenes llegan a su limite, regresa al inicio   // Operador terniario! (⭐️)
-
+    if (imageBlock == false) {
+        imgV++        // Sugar Syntax (⭐️)
+        bandImage.src="images/band" + imgV + ".jpg" // Cambia el nombre del archivo para que así se altere el source de la imagen, cambiandola.
+        bandEres.innerText = "Eres: " + bandNames[imgV-1]; // Se le informa al usuario que artista es. 
+        localStorage.setItem('mainBandName', bandNames[imgV-1]); // Se carga el ultimo resultado al local storage // Local Storage (⭐️)
+        imgV > bandNames.length-1 ? imgV = 0 : imgV // Una ves que las imagenes llegan a su limite, regresa al inicio   // Operador terniario! (⭐️)
+    }
 };
 
 // ########################################################################################################################
@@ -95,6 +97,11 @@ let enterValidation = document.getElementById("all");
 
 enterValidation.addEventListener("keypress", (event) => {
     function confirmationToast() {
+        if (imgV !== 0) {   
+            imageBlock = true; // Blocks the image from moving
+            
+        }
+
         if (imgV === 0 ) {
             return
         } else {
