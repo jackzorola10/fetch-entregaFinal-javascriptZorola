@@ -1,33 +1,33 @@
-let complementaryAplausoValue;
-async function render() {
-
+// ENTREGA FINAL 
 // El concepto es de un board de canciones que las personas podrán apoyar con el presionar de un Enter a partir del resultado del test en la parte inferior. 
+// Al finalizar los enviará a otro archivo de html donde podrán enviar su información a traves de un correo.
+// Marque con un ⭐️ todos los lugares en los que use conceptos fundamentales del curso para encontrarlos mas facilmente. 
 
-localStorage.clear();
-const resp = await fetch('https://jackzorola10.github.io/fetch-entregaFinal-javascriptZorola/songs.json')
-const data = await resp.json()
+async function render() { // Toda la aplicación esta encerrada en una sola función, la cual la forza a correr de manera cronologica, esto, he de admitir no es la mejor opción de lo que me hubiese gustado hacer pero dado los tiempos es lo que tuve que hacer para forzar el fetch a funcionar. 
 
-// Array inicial con las canciones presentadas al usuario. 
+localStorage.clear(); 
+const resp = await fetch('https://jackzorola10.github.io/fetch-entregaFinal-javascriptZorola/songs.json') // La aplicación utiliza un array de objetos, la cual yo acomode en un json que esta publico en Github. En este está un array inicial con las canciones presentadas al usuario. 
+const data = await resp.json() // Fetch (⭐️)
 
-songs = [...data]
+songs = [...data] // Lo obtenido en el json, se implemntará dentro de este array. // Spread (⭐️)
 
-// Array de nombres de las bandas, este array esta matcheado contra las imagenes que tenemos en la carpeta. Para que le aparezca al usuario el nombre dependiendo de lo que le haya aparecido. 
+// #################################################################
 
-let bandNames = []
+let bandNames = [] // Utilizando el array de canciónes extraeremos los nombres de los autores, estos se matchearan en orden contra unas imagenes que tenemos en nuestro proyecto para el QUIZ de mas abajo. 
 
 for (let obj of songs) {
-    bandNames = [...bandNames, obj.autor]   // Spread (⭐️)
-}
+    bandNames = [...bandNames, obj.autor]   
+} // For y llenado de arrays (⭐️)
 
-let stringsOfArrayOfSongs = [] // Se llenará de un string hecho para poder depositarse con un innerHTML de manera comoda. 
+// #################################################################
+
+let stringsOfArrayOfSongs = [] // De manera que podamos imprimir la tabla que usaremos y que esta pueda ser actualizada, la aproximación que tome fue imprimir valores del array sobre un string. Cada string ingresará al "stringsOfArrayOfSongs" como una entrada y luego las uniremos para ser impresas en el html.
  
-// Funcion que transforma los arrays de objetos en las tablas para imprimirlas.
-
-const printTableOfSongs = (arrayOfObj) => {
+const printTableOfSongs = (arrayOfObj) => { // Funcion que transforma los arrays de objetos en las tablas para imprimirlas.
     console.log(arrayOfObj)
-    stringsOfArrayOfSongs.splice(0, stringsOfArrayOfSongs.length);
+    stringsOfArrayOfSongs.splice(0, stringsOfArrayOfSongs.length);  // Splice (⭐️)
     for (let i = 0; i < arrayOfObj.length; i++) {
-        stringsOfArrayOfSongs.push(
+        stringsOfArrayOfSongs.push( // Push (⭐️)
         "<tr>" +
             "<th scope='row'>" + arrayOfObj[i].id + '</th>' +
             "<td><strong>" + arrayOfObj[i].name + '</strong></td>' +
@@ -37,70 +37,53 @@ const printTableOfSongs = (arrayOfObj) => {
         "</tr>"
         );
     }
-    console.log(stringsOfArrayOfSongs.length)
 } 
 
-printTableOfSongs(songs);
+printTableOfSongs(songs); // invocamos la función creada justo acá arriba.
 console.log(stringsOfArrayOfSongs);
 
-
-// INICIA EL FLUJO DEL USUARIO
-
-// ########################################################################################################################
-
-
-    // Imprimimos la primer tabla que se ve hasta arriba para el usuario.
-    let initialPlaylist = document.getElementById("PlaylistSelection");
-        initialPlaylist.innerHTML = stringsOfArrayOfSongs.join("")
+// INICIA EL FLUJO DEL USUARIO 👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼👇🏼
 
 // ########################################################################################################################
 
-//  Dependiendo de la selección en el input, el listener nos avisará y cambiaremos la tabla inferior para el usuario, imprimiendo una nueva. En esta sección por ahora solo capto el registro y activo la función printFilteredPlaylist() como segundo paso.
+const printFilteredPlaylist = (htmlID) => { // Arrow function que recibe un ID y dentro de este escupe el ultimo stringsOfArrayOfSongs. Generando una nueva tabla de canciones.
+    let genreFilteredPlaylist = document.getElementById(htmlID)
+    genreFilteredPlaylist.innerHTML = stringsOfArrayOfSongs.join(""); // Writing in DOM (⭐️)
+}
+    // Imprimimos la primer tabla que se ve hasta arriba para el usuario. 
+    printFilteredPlaylist("PlaylistSelection");  
+
+// ########################################################################################################################
+
+// Le permitimos al usuario filtrar la tabla en la parte superior. Esto, aunque honestamente no es super valioso para el flujo general, era necesario para probar el entendimiento de los filtrados de los arrays, el uso d arrow functions y probar las mismas funciones creadas arriba, para su mayor abstracción.
+
 let songFilter = [];
 const userGenre = document.getElementById("selectDeGenero");
 
-console.log("userGenre is " + userGenre)
-
-userGenre.addEventListener('change', () => {                    // Evento utilizado.
-    console.log("Genre obtained = " + event.target.value);
-    songFilter = songs.filter(   (el) => el.genero.includes(event.target.value)  ); 
-
+userGenre.addEventListener('change', () => {                    // Event Listener utilizado (⭐️).
+    console.log("Genre obtained = " + event.target.value); // El usuario selecciona un genero del dropdown.
+    songFilter = songs.filter(   (el) => el.genero.includes(event.target.value)  );  // Esa selección se usa para filtrar nuestro array de objetos principal "songs"
     console.log("songFilter value = " + songFilter);
-    printTableOfSongs(songFilter);
 
-    console.log(stringsOfArrayOfSongs);
-    printFilteredPlaylist ();
+    printTableOfSongs(songFilter); //  Creamos un nuevo array que se carga en stringsOfArrayOfSongs
+    printFilteredPlaylist("FinalPlaylist"); // Extraemos dentro de que ID queremos enviar la ultima tabla de canciones de stringsOfArrayOfSongs y la imprimimos.
 }) 
 
 // ########################################################################################################################
 
-function printFilteredPlaylist () {
-    genreFilteredPlaylist = document.getElementById("FinalPlaylist")
-    stringify = stringsOfArrayOfSongs.join("");
-    genreFilteredPlaylist.innerHTML = stringify;
-}
+// En esta sección el usuario podra participar en un test, donde podrá jugar a ver "cual artista le toca", rotando entre una serie de imagenes de las bandas mencionadas en el primer array, a traves de una detección de eventos. 
 
-// ########################################################################################################################
-
-// En esta sección el usuario podra participar en un test, donde podrá jugar a ver "cual artista le toca", rotando entre una serie de imagenes de las bandas mencionadas en el primer array.
-
-let bandImage = document.getElementById('imageForTest');
+let bandImage = document.getElementById('imageForTest'); 
 let bandEres = document.getElementById('eres');
-let imgV = parseInt(0);
-let bandInSpotlight;
-
-
-
+let imgV = parseInt(0); // Dado que nuestras imagenes estan en un orden especifico, todas tienen un nombre similar, variando solo por el numero al final. Ej: "images/band1.jpg" Podemos rotar a traves de ellas, teniendo el largo del array como limite.
 
 bandImage.onmousemove = () => {
     imgV++        // Sugar Syntax (⭐️)
     console.log("mousemove")
-    bandImage.src="images/band" + imgV + ".jpg"
-    bandEres.innerText = "Eres: " + bandNames[imgV-1];
-    bandInSpotlight = bandNames[imgV-1]
-    localStorage.setItem('mainBandName', bandNames[imgV-1]);
-    imgV > bandNames.length-1 ? imgV = 0 : imgV    // Operador terniario! (⭐️)
-
+    bandImage.src="images/band" + imgV + ".jpg" // Cambia el nombre del archivo para que así se altere el source de la imagen, cambiandola.
+    bandEres.innerText = "Eres: " + bandNames[imgV-1]; // Se le informa al usuario que artista es. 
+    localStorage.setItem('mainBandName', bandNames[imgV-1]); // Se carga el ultimo resultado al local storage // Local Storage (⭐️)
+    imgV > bandNames.length-1 ? imgV = 0 : imgV // Una ves que las imagenes llegan a su limite, regresa al inicio   // Operador terniario! (⭐️)
 
 };
 
@@ -110,7 +93,6 @@ bandImage.onmousemove = () => {
 
 let enterValidation = document.getElementById("all");
 
-
 enterValidation.addEventListener("keypress", (event) => {
     function confirmationToast() {
         if (imgV === 0 ) {
@@ -119,7 +101,7 @@ enterValidation.addEventListener("keypress", (event) => {
             let bandNameFilter = bandNames[imgV-1];
             console.log("bandNameFilter is " + bandNameFilter);
         
-            Toastify({ // Uso de librerias (⭐️)
+            Toastify({ // Le informamos al usuario a traves de hacer aparecer una pequeña notificación en la parte inferor // Uso de librerias (⭐️)
                 text: "👏🏼 for " + bandNames[imgV-1],
                 gravity: "bottom",
                 style: {
@@ -127,8 +109,8 @@ enterValidation.addEventListener("keypress", (event) => {
                   }
             }).showToast();
     
-            const newArr = songs.map(obj => {
-                if (obj.autor === bandNameFilter) {
+            const newArr = songs.map(obj => { // Se imprime el nuevo array, cambiando solo los aplausos. // map (⭐️)
+                if (obj.autor === bandNameFilter) { 
                     return {
                       id: obj.id,
                       name: obj.name,
@@ -140,29 +122,20 @@ enterValidation.addEventListener("keypress", (event) => {
               });
     
                     printTableOfSongs(newArr);
-                    initialPlaylist = document.getElementById("PlaylistSelection");
-                    stringify = stringsOfArrayOfSongs.join("");
-                    initialPlaylist.innerHTML = stringify;
-                    
+                    printFilteredPlaylist("PlaylistSelection")                    
                     localStorage.setItem('aplausos', songs[imgV-1].aplausos); 
-
 
                     console.log("ENTER");
         }
-
     }
-    
                 event.key === "Enter" && confirmationToast() // Uso de operador logico AND (⭐️)
                 event.preventDefault();
                 
                 event.key !== "Enter" && console.log("Not enter");
 })
 
-// ########################################################################################################################
-
-
-
 }
 
 render();
 
+// 
