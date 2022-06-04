@@ -1,3 +1,4 @@
+let complementaryAplausoValue;
 async function render() {
 
 // El concepto es de un board de canciones que las personas podrán apoyar con el presionar de un Enter a partir del resultado del test en la parte inferior. 
@@ -88,14 +89,18 @@ let bandEres = document.getElementById('eres');
 let imgV = parseInt(0);
 let bandInSpotlight;
 
+
+
+
 bandImage.onmousemove = () => {
     imgV++        // Sugar Syntax (⭐️)
     console.log("mousemove")
     bandImage.src="images/band" + imgV + ".jpg"
     bandEres.innerText = "Eres: " + bandNames[imgV-1];
     bandInSpotlight = bandNames[imgV-1]
-    
+    localStorage.setItem('mainBandName', bandNames[imgV-1]);
     imgV > bandNames.length-1 ? imgV = 0 : imgV    // Operador terniario! (⭐️)
+
 
 };
 
@@ -104,6 +109,7 @@ bandImage.onmousemove = () => {
 // En esta sección adquirimos el evento del ENTER y cada que esto ocurra escribimos un array nuevo el cual se imprime en la tabla superior, con la diferencia en que dependiendo del artista que le haya tocado en el array sumaremos "aplausos" a este artista. 
 
 let enterValidation = document.getElementById("all");
+
 
 enterValidation.addEventListener("keypress", (event) => {
     function confirmationToast() {
@@ -137,8 +143,11 @@ enterValidation.addEventListener("keypress", (event) => {
                     initialPlaylist = document.getElementById("PlaylistSelection");
                     stringify = stringsOfArrayOfSongs.join("");
                     initialPlaylist.innerHTML = stringify;
-                    console.log("ENTER");
+                    
+                    localStorage.setItem('aplausos', songs[imgV-1].aplausos); 
 
+
+                    console.log("ENTER");
         }
 
     }
@@ -146,26 +155,14 @@ enterValidation.addEventListener("keypress", (event) => {
                 event.key === "Enter" && confirmationToast() // Uso de operador logico AND (⭐️)
                 event.preventDefault();
                 
-                event.key !== "Enter" && console.log("Not enter")
+                event.key !== "Enter" && console.log("Not enter");
 })
 
 // ########################################################################################################################
+
 
 
 }
 
 render();
 
-// TO SOLVE: Make it so the filter is the only thing from which you can select in the section below
-// Make connection with email post https://www.emailjs.com/
-
-// El proyecto final debe incluir:
-/* 
-        Objetos y Arrays. Métodos de Arrays.
-        Funciones y condicionales.
-        Generación del DOM de forma dinámica. Eventos.
-        Sintaxis avanzada.
-        Al menos una librería de uso relevante para el proyecto.
-        Manejo de promesas con fetch. 
-        Carga de datos desde un JSON local o desde una API externa.
- */

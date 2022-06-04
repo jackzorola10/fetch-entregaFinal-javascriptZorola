@@ -1,0 +1,19 @@
+{
+  "name": "mi-app",
+  "version": "1.0.0",
+  "description": "Este va a ser la instalacion de npm",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackzorola10/fetch-entregaFinal-javascriptZorola.git"
+  },
+  "author": "Jack Zorola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackzorola10/fetch-entregaFinal-javascriptZorola/issues"
+  },
+  "homepage": "https://github.com/jackzorola10/fetch-entregaFinal-javascriptZorola#readme"
+}
